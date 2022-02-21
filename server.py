@@ -18,8 +18,9 @@ from subprocess import Popen, PIPE
 
 ###############################
 # CONFIGURATION
-SECRET = 'REPLACE_WITH_SECRET'
-HEROADDR = 'REPLACE_WITH_URL'+SECRET
+# SECRET = '94b70446-9048-4110-b4b7-dad8258c879d'
+SECRET = '2307989c-1107-4683-9147-bb1d7aad75a4'
+HEROADDR = 'https://hidden-peak-20336.herokuapp.com/'+SECRET
 ERROR1 = "[Errno 104] Connection reset by peer"
 ERROR2 = "Remote end closed connection without response"
 ###############################
@@ -39,10 +40,19 @@ if __name__ == '__main__':
     logger.info("Popen ffmpeg")
     url = HEROADDR
     output = Popen(
-        "ffmpeg -loglevel fatal -f v4l2 -video_size 640x480 -r 25 -i /dev/video0 -f mpegts -vf 'vflip, hflip' -vcodec mpeg1video -s 640x480 -b:v 1000k -bf 0 -",
+        "ffmpeg -loglevel fatal -f v4l2 -video_size 640x480 -r 25 -i /dev/video0 -f mpegts -vf 'vflip, hflip' -codec:v mpeg1video -s 640x480 -b:v 1000k -bf 0 -",
         # Use below if on a Pi Zero W -> need the smaller size
         # "ffmpeg -f v4l2 -video_size 352x288 -i /dev/video1 -f mpegts -vf 'vflip, hflip' -vcodec mpeg1video -s 352x288 -bf 0 -",
         stdout=PIPE, stderr=sys.stdout, shell=True)
+
+
+    print(output)
+
+    print("YAYAAHLKLJ")
+    print("urL", url)
+    # res = requests.post(url, data="hi", stream=True)
+    # print("ya?")
+    # print(res)
 
     attempt = 0
     while True:

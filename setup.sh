@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #### 1. Update /etc/crontab to run the start.sh script on reboot ####
-echo "setting up crontab reboot"
+echo "setting up crontab reboot TODO: I removed this! ARthur"
 chmod 755 picam_livestream/start.sh
-echo "@reboot pi sudo bash /home/pi/picam_livestream/start.sh" | sudo tee --append /etc/crontab
+# echo "@reboot pi sudo bash /home/pi/picam_livestream/start.sh" | sudo tee --append /etc/crontab
 
 #### 2. Create and Setup Heroku App ####
 
