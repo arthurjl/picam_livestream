@@ -39,20 +39,14 @@ if __name__ == '__main__':
 
     logger.info("Popen ffmpeg")
     url = HEROADDR
+    # Note second line outputs
     output = Popen(
-        "ffmpeg -loglevel fatal -f v4l2 -video_size 640x480 -r 25 -i /dev/video0 -f mpegts -vf 'vflip, hflip' -codec:v mpeg1video -s 640x480 -b:v 1000k -bf 0 -",
+        "ffmpeg -loglevel fatal -f v4l2 -video_size 640x480 -r 25 -i /dev/video0 \
+        -r 0.001 -strftime 1 /home/pi/plant-live-viewing/data/%Y-%m-%d_%H-%M-%S_output.jpg \
+        -f mpegts -vf 'vflip, hflip' -codec:v mpeg1video -s 640x480 -b:v 1000k -bf 0 -",
         # Use below if on a Pi Zero W -> need the smaller size
         # "ffmpeg -f v4l2 -video_size 352x288 -i /dev/video1 -f mpegts -vf 'vflip, hflip' -vcodec mpeg1video -s 352x288 -bf 0 -",
         stdout=PIPE, stderr=sys.stdout, shell=True)
-
-
-    print(output)
-
-    print("YAYAAHLKLJ")
-    print("urL", url)
-    # res = requests.post(url, data="hi", stream=True)
-    # print("ya?")
-    # print(res)
 
     attempt = 0
     while True:
