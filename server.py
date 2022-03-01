@@ -42,8 +42,9 @@ if __name__ == '__main__':
     # Note second line outputs
     output = Popen(
         "ffmpeg -loglevel fatal -f v4l2 -video_size 640x480 -r 25 -i /dev/video0 \
+        -vf drawtext=text='%{localtime}':fontcolor=black@0.8:x=7:y=15 \
         -r 0.001 -strftime 1 /home/pi/plant-live-viewing/data/%Y-%m-%d_%H-%M-%S_output.jpg \
-        -f mpegts -vf 'vflip, hflip' -codec:v mpeg1video -s 640x480 -b:v 1000k -bf 0 -",
+        -f mpegts -vf drawtext=text='%{localtime}':fontcolor=black@0.8:x=7:y=15 -codec:v mpeg1video -s 640x480 -b:v 1000k -bf 0 -",
         # Use below if on a Pi Zero W -> need the smaller size
         # "ffmpeg -f v4l2 -video_size 352x288 -i /dev/video1 -f mpegts -vf 'vflip, hflip' -vcodec mpeg1video -s 352x288 -bf 0 -",
         stdout=PIPE, stderr=sys.stdout, shell=True)
